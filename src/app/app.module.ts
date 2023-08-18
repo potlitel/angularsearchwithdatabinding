@@ -12,6 +12,8 @@ import { NzEmptyModule } from 'ng-zorro-antd/empty';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NzResultModule } from 'ng-zorro-antd/result';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
+import { NgxPaginationModule } from 'ngx-pagination'; // <-- import the module
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { HttpClientModule } from '@angular/common/http';
@@ -32,7 +34,9 @@ registerLocaleData(en);
     NzEmptyModule,
     NzResultModule,
     NzButtonModule,
+    NzSpinModule,
     Ng2SearchPipeModule,
+    NgxPaginationModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent],

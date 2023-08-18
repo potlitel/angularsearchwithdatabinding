@@ -1,3 +1,9 @@
+# Info
+
+This repository represents a realization of the practical exercise of the following link [Implementing Search Functionality with Data Binding in Angular 16](https://therichpost.com/implementing-search-functionality-with-data-binding-in-angular-16/) and looks like this:
+
+<img src="images/Resume.gif" alt="Logo" width="840" height="480">
+
 # Angularsearchwithdatabinding
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.3.

@@ -1,37 +1,62 @@
 <div class="container p-5">
+  <h1 class="d-flex justify-content-center">Online Product Catalog!</h1>
   <!-- <div class="p-1 mb-2 bg-primary text-white text-center fs-3">Therichpost</div> -->
   <div class="input-group">
     <span class="input-group-text bg-primary text-white">Search Product</span>
     <input type="text" class="form-control" [(ngModel)]="searchText" />
   </div>
 
-  <div nz-row nzJustify="space-between" nzAlign="bottom">
-    <ng-container
-      *ngIf="products | filter : searchText.toLowerCase() as searchResult"
-    >
-      <div
-        class="mt-2"
-        *ngFor="let product of products | filter : searchText.toLowerCase()"
-      >
-        <div nz-col nzSpan="4">
-          <nz-card nzHoverable style="width: 240px" [nzCover]="coverTemplate">
-            <nz-card-meta
-              [nzTitle]="product.product_title"
-              [nzDescription]="product.product_price"
-            ></nz-card-meta>
-          </nz-card>
-          <ng-template #coverTemplate>
-            <img alt="example" [src]="product.product_image" />
-          </ng-template>
-        </div>
-      </div>
-      <p *ngIf="searchResult.length === 0">
-        <nz-result nzStatus="info" nzTitle="Your operation has been executed">
-          <div nz-result-extra>
-            <button nz-button nzType="primary">Back Home</button>
+  <nz-spin
+    nzTip="Loading products..."
+    [nzSize]="'large'"
+    [nzSpinning]="loadingProducts"
+  >
+    <div nz-row nzJustify="space-between" nzAlign="bottom">
+      <ng-container *ngIf="products | filter : searchText as searchResult">
+        <div
+          class="mt-2"
+          *ngFor="
+            let product of products | filter : searchText | paginate : config
+          "
+        >
+          <div nz-col nzSpan="4">
+            <nz-card nzHoverable style="width: 240px" [nzCover]="coverTemplate">
+              <nz-card-meta
+                [nzTitle]="product.product_title"
+                [nzDescription]="product.product_price"
+              ></nz-card-meta>
+            </nz-card>
+            <ng-template #coverTemplate>
+              <img alt="example" [src]="product.product_image" />
+            </ng-template>
           </div>
-        </nz-result>
-      </p>
-    </ng-container>
+        </div>
+        <p *ngIf="searchResult.length === 0">
+          <nz-result
+            nzStatus="info"
+            class="flex items-center justify-center flex-col m-auto"
+            nzTitle="No product was found with the specified search criteria."
+          >
+            <div nz-result-extra>
+              <button nz-button nzType="primary" (click)="clearFilter()">
+                Clear filter
+              </button>
+            </div>
+          </nz-result>
+        </p>
+      </ng-container>
+    </div>
+  </nz-spin>
+  <br />
+  <div
+    class="d-flex justify-content-center"
+    *ngIf="(products | filter : searchText).length !== 0"
+  >
+    <pagination-controls
+      previousLabel="Anterior"
+      nextLabel="Siguiente"
+      (pageChange)="pageChanged($event)"
+    >
+    </pagination-controls>
   </div>
 </div>
