@@ -1,44 +1,37 @@
 <div class="container p-5">
-  <div class="p-1 mb-2 bg-primary text-white text-center fs-3">Therichpost</div>
+  <!-- <div class="p-1 mb-2 bg-primary text-white text-center fs-3">Therichpost</div> -->
   <div class="input-group">
     <span class="input-group-text bg-primary text-white">Search Product</span>
     <input type="text" class="form-control" [(ngModel)]="searchText" />
   </div>
 
-  <div class="mt-2" *ngFor="let product of products">
-    <div
-      class="product-container"
-      *ngIf="
-        searchText === '' ||
-        product.product_title.toLowerCase().includes(searchText.toLowerCase())
-      "
+  <div nz-row nzJustify="space-between" nzAlign="bottom">
+    <ng-container
+      *ngIf="products | filter : searchText.toLowerCase() as searchResult"
     >
-      <!-- <div
-        class="product-container"
-        *ngIf="
-          !product.product_title
-            .toLowerCase()
-            .includes(searchText.toLowerCase())
-        "
+      <div
+        class="mt-2"
+        *ngFor="let product of products | filter : searchText.toLowerCase()"
       >
-        No data found
-      </div> -->
-      <!-- <div class="card mb-2 me-4">
-        <img [src]="product.product_image" class="card-img-top" alt="..." />
-        <div class="card-body">
-          <p class="card-text text-center">{{ product.product_title }}</p>
-          <p class="card-text text-center">{{ product.product_price }}</p>
+        <div nz-col nzSpan="4">
+          <nz-card nzHoverable style="width: 240px" [nzCover]="coverTemplate">
+            <nz-card-meta
+              [nzTitle]="product.product_title"
+              [nzDescription]="product.product_price"
+            ></nz-card-meta>
+          </nz-card>
+          <ng-template #coverTemplate>
+            <img alt="example" [src]="product.product_image" />
+          </ng-template>
         </div>
-      </div> -->
-      <nz-card nzHoverable style="width: 240px" [nzCover]="coverTemplate">
-        <nz-card-meta
-          [nzTitle]="product.product_title"
-          [nzDescription]="product.product_price"
-        ></nz-card-meta>
-      </nz-card>
-      <ng-template #coverTemplate>
-        <img alt="example" [src]="product.product_image" />
-      </ng-template>
-    </div>
+      </div>
+      <p *ngIf="searchResult.length === 0">
+        <nz-result nzStatus="info" nzTitle="Your operation has been executed">
+          <div nz-result-extra>
+            <button nz-button nzType="primary">Back Home</button>
+          </div>
+        </nz-result>
+      </p>
+    </ng-container>
   </div>
 </div>

@@ -25,3 +25,9 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Usefull links
+
+[Angular - 5 different ways to filter ngFor (Code examples included)](https://danielk.tech/home/angular-how-to-apply-filters-to-ngfor)
+
+[How to display No records found message using search pipe in angular](https://stackoverflow.com/questions/51926295/how-to-display-no-records-found-message-using-search-pipe-in-angular)
